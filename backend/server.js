@@ -7,9 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+require("dotenv").config();
+
 mongoose
-  .connect("mongodb://127.0.0.1:27017/adi-system")
-  .then(() => console.log("MongoDB connected"))
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Atlas connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/api/auth", authRoutes);
